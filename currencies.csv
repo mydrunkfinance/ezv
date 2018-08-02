@@ -1,0 +1,73 @@
+symbol,fetch,country
+EUR,1,Euro Member
+USD,1,United States
+EGP,0,Egypt
+ALL,0,Albania
+ARS,0,Argentina
+AZN,0,Azerbaijan New
+ETB,0,Ethiopia
+AUD,0,Australia
+BHD,0,Bahrain
+BDT,0,Bangladesh
+BAM,0,Bosnia and Herzegovina
+BRL,0,Brazil
+BGN,0,Bulgaria
+CLP,0,Chile
+CNY,0,China Yuan
+CRC,0,Costa Rica
+DKK,1,Denmark
+DOP,0,Dominican Republic
+GBP,1,United Kingdom
+GTQ,0,Guatemala
+HNL,0,Honduras
+HKD,0,Hong Kong
+INR,0,India
+IDR,0,Indonesia
+ISK,0,Iceland
+ILS,0,Israel
+JPY,1,Japan
+KYD,0,Cayman Islands
+KHR,0,Cambodia
+CAD,0,Canada
+KZT,0,Kazakhstan
+QAR,0,Qatar
+KES,0,Kenya
+COP,0,Colombia
+HRK,0,Croatia
+KWD,0,Kuwait
+LBP,0,Lebanon
+LYD,0,Libya
+MYR,0,Malaysia
+MAD,0,Morocco
+MUR,0,Mauritius
+MXN,0,Mexico
+NZD,0,New Zealand
+NGN,0,Nigeria
+NOK,0,Norway
+OMR,0,Oman
+PKR,0,Pakistan
+PAB,0,Panama
+PEN,0,Peru Nuevo
+PHP,0,Philippines
+PLN,0,Poland
+RON,0,Romania New
+RUB,0,Russia
+SAR,0,Saudi Arabia
+SEK,0,Sweden
+RSD,0,Serbia
+SGD,0,Singapore
+LKR,0,Sri Lanka
+KRW,0,Korea (South)
+ZAR,0,South Africa
+TWD,0,Taiwan New
+TZS,0,Tanzania
+THB,0,Thailand
+CZK,0,Czech Republic
+TND,0,Tunisia
+TRY,0,Turkey
+UAH,0,Ukraine
+HUF,0,Hungary
+UYU,0,Uruguay
+VEF,0,Venezuela
+AED,0,United Arab Emirates
+VND,0,Viet Nam
