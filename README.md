@@ -16,7 +16,7 @@ Data is broken up by symbol into <symbol>.csv files.
 
 ## Downloader
 
-Use `./fetch.py` to download latest update and merge them into .csv's.
+Use `./fetch.py` to download latest updates and merge them into .csv's.
 
-Edit currencies.csv to specify which currencies should get fetches or
-pass `--all` flag to download all available.
+Edit currencies.csv to specify which currencies should get fetched or
+pass `--all` flag to download all available currencies.
