@@ -163,26 +163,32 @@ def main():
     df['fetch'] = '1'
     df[['symbol', 'fetch', 'country']].to_csv(currencies_csv, index=False)
 
-  df = pd.read_csv(currencies_csv)
-  if df['fetch'].sum() == 0:
+  currencies = pd.read_csv(currencies_csv)
+  if currencies['fetch'].sum() == 0:
     print('Please edit %s and mark which currencies to fetch' % currencies_csv)
     sys.exit(1)
 
-  to_fetch = df[df.fetch == 1]['symbol']
+  to_fetch = currencies[currencies.fetch == 1]['symbol']
   if sys.argv[1:] == ['--all']:
-    to_fetch = df['symbol']
+    to_fetch = currencies['symbol']
 
-  data = { sym: fetch_currency(sym) for sym in to_fetch }
+  for symbol in to_fetch:
+    fetch_currency(symbol)
 
-  '''
-  with open(os.path.join(OUTPUT_DIR, 'prices.beancount'), 'w') as fp:
-    for sym, df in data.items():
-      for row in df.query('date >= "2011"').itertuples():
-        eff_date = datetime.datetime.strptime(row.date, '%Y-%m-%d')
-        eff_date += datetime.timedelta(days=1)
-        fp.write('%s price %s %s %s\n' %
-                 (eff_date.strftime('%Y-%m-%d'), row.symbol, row.price, row.currency))
-  '''
+  # Merge all data
+  all_data = []
+  for symbol in currencies.symbol:
+    filename = os.path.join(OUTPUT_DIR, '%s.csv' % symbol.upper())
+    if os.path.exists(filename):
+      all_data.append(pd.read_csv(filename, converters={'price': Decimal}, parse_dates=['date']))
+
+  all_data = pd.concat(all_data, axis=0).sort_values(['date', 'symbol']).reset_index(drop=True)
+  all_data.to_csv(os.path.join(OUTPUT_DIR, 'ezv.long.csv'), index=False)
+
+  wide = all_data.pivot('date', 'symbol', 'price')
+  wide['CHF'] = Decimal('1.0')
+  wide['GBX'] = wide['GBP'] / 100
+  wide.to_csv('ezv.wide.csv')
 
 
 if __name__ == '__main__':
