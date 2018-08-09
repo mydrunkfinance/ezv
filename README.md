@@ -43,3 +43,33 @@ regenerate joined files.
 
 Edit currencies.csv to specify which currencies should get fetched or
 pass `--all` flag to download all available currencies.
+
+
+## Bias
+
+Comparison with fine-grained price data from third party sources
+reveals that EZV appears to collect its data around 3am UTC and
+**there's a systematic 1% bias**. For example deviation for USD/CHF
+averaged over minute-of-the-week:
+
+```
+import pandas as pd
+df = pd.read_csv(
+  'FX-1-Minute-Data/full-data-2000-2017/usdchf/DAT_ASCII_USDCHF_M1_2016.csv',
+  parse_dates=[0], index_col=0, delimiter=';',
+  names=['date', 'open', 'high', 'low', 'close', 'vol'])
+df['ezv'] = pd.read_csv('ezv/USD.csv', parse_dates=[0], index_col=[0]).price
+df = df.ffill().dropna(how='any')
+
+def agg_fn(df):
+  return pd.DataFrame({
+    'ezv/close - 1': df.ezv/df.close-1,
+    'ezv/low - 1': df.ezv/df.low-1,
+    'ezv/high - 1': df.ezv/df.high-1,
+    'std(ezv/close)': (df.ezv/df.close).std()
+  }).mean()
+
+df.groupby(df.index.dayofweek * 24 * 60 + df.index.hour * 60 + df.index.minute).apply(agg_fn).plot(grid=True)
+```
+
+![alt text](README.bias.png)
